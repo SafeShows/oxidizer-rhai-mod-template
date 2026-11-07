@@ -1,0 +1,32 @@
+# Push a tag like v1.0.0 to publish a GitHub release with <MOD_ID>-<version>.zip: one <MOD_ID>/ folder with
+# everything in this repository except the Git, GitHub and template files. That name and layout is what the
+# KSA content index (and mod managers like Borea) expect.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+env:
+  MOD_ID: my_mod # the mod's folder name in mods/: keep it the same as in mod.toml's comment and the index listing
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Zip
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          mkdir -p "dist/$MOD_ID"
+          rsync -a --exclude .git --exclude .github --exclude README.md --exclude index-listing.example.toml ./ "dist/$MOD_ID/"
+          cd dist && zip -qr "../$MOD_ID-$version.zip" "$MOD_ID"
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "$MOD_ID-${GITHUB_REF_NAME#v}.zip" --title "$MOD_ID $GITHUB_REF_NAME" --generate-notes

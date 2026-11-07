@@ -1,0 +1,6 @@
+# The mod's id is the name of its folder in mods/ (here: my_mod). Rename the folder, `name` and MOD_ID in
+# .github/workflows/release.yml together.
+name = "my_mod"
+
+[oxidizer]
+script = "main.rhai"
