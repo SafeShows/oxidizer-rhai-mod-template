@@ -28,4 +28,4 @@ id = "StarMap"
 [[dependencies]]
 id = "Oxidizer.StarMap"
 kind = "required"
-min = "0.5.0"
+min = "0.6.0"

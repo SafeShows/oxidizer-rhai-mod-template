@@ -40,13 +40,14 @@ fn gui(dt) {
         return;
     }
     if begin("My mod") {
-        let vehicle = static_get("KSA.Program, KSA", "ControlledVehicle");
-        if vehicle.is_null() {
+        // The game, typed: ksa::<Type>::<static member>(), and obj.<member> on its objects (snake_case names).
+        let vehicle = ksa::Program::controlled_vehicle();
+        if vehicle == () {
             text("no vehicle");
         } else {
-            text(`vehicle: ${vehicle.get("Id")}`);
+            text(`vehicle: ${vehicle.id}`);
         }
-        text(`time: ${static_call("KSA.Universe, KSA", "GetElapsedSeconds").float()} s`);
+        text(`time: ${ksa::Universe::get_elapsed_seconds()} s`);
         if button("Click me") {
             this.clicks += 1;
         }

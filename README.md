@@ -33,8 +33,11 @@ The mod's id is its folder name in `mods/`. To rename it from `my_mod`, change t
 
 `main.rhai` has `init`, `frame`, `gui`, `menu` and `reload`, each optional, with comments. The full list of
 functions (game objects, hooks, ImGui, keys, settings) is in
-[Oxidizer's README](https://github.com/SafeShows/Oxidizer#rhai). To find the game's type and member names, open
-`KSA.dll` from the game folder in a .NET decompiler such as ILSpy.
+[Oxidizer's README](https://github.com/SafeShows/Oxidizer#rhai). The game itself is available as typed modules
+(`ksa::Program::controlled_vehicle()`, `vehicle.id`; needs Oxidizer 0.6.0 or later). For autocomplete, add
+`<Documents>/My Games/Kitten Space Agency/oxidizer/definitions/`, which Oxidizer writes when the game starts, to
+your editor's workspace (with a Rhai extension installed). To see what the game's members do, open `KSA.dll` from
+the game folder in a .NET decompiler such as ILSpy.
 
 More `.rhai` files or other assets can go in this folder; all of it ends up in the release zip.
 
