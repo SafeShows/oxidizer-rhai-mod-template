@@ -24,6 +24,7 @@ jobs:
           version="${GITHUB_REF_NAME#v}"
           mkdir -p "dist/$MOD_ID"
           rsync -a --exclude .git --exclude .github --exclude README.md --exclude index-listing.example.toml ./ "dist/$MOD_ID/"
+          [[ "$GITHUB_REF" == refs/tags/* ]] && sed -i "s/^version = \".*\"/version = \"$version\"/" "dist/$MOD_ID/mod.toml"   # the mod's version is the tag's
           cd dist && zip -qr "../$MOD_ID-$version.zip" "$MOD_ID"
 
       - name: Release

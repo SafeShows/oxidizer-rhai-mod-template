@@ -4,3 +4,11 @@ name = "my_mod"
 
 [oxidizer]
 script = "main.rhai"
+# This mod's version, for mods that depend on it. The release workflow sets it from the git tag.
+version = "0.1.0"
+# Dependencies on other mods (Oxidizer 0.8+): this mod starts after them, and doesn't start if a required one is
+# missing or outside its version bounds. See https://safeshows.github.io/Oxidizer/mod-folders/
+# dependencies = [
+#     { id = "some_mod", min = "1.0", max = "1.9" },
+#     { id = "other_mod", optional = true },
+# ]

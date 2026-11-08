@@ -10,6 +10,12 @@ fn init() {
     print("my_mod: hello!");                      // shows in the log and in Mods > Oxidizer
 }
 
+// Once the game has loaded its content and mods (init runs earlier, before the game has loaded anything).
+// There is no flight yet: the controlled vehicle comes later.
+fn loaded() {
+    print("my_mod: the game has loaded");
+}
+
 // Runs after the file was saved and reloaded.
 fn reload() {
     print("my_mod: reloaded");
